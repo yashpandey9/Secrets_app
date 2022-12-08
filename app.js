@@ -1,5 +1,10 @@
 const express = require('express');
 const app = express();
+const connectionDB = require('./database/connection');
+const routes = require('./router/routes');
+
+//connecting MongoDB
+connectionDB();
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -10,6 +15,9 @@ app.use('/public', express.static('public'));
 //parsing
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+//routing
+app.use(routes);
 
 //printing the process id 
 const server = app.listen(process.env.PORT || 3000, () => {
