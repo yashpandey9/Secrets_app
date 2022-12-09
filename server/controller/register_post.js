@@ -1,10 +1,9 @@
 const register_service = require('../services/register_user');
-const md5 = require('md5');
 
 const create = async(req, res) => {
     try{
        const username = req.body.username;
-       const password = md5(req.body.password);
+       const password = req.body.password;
 
        if(!username){
         throw new Error("username missing");

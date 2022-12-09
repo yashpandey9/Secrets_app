@@ -1,7 +1,9 @@
 const user_model = require('../model/userinfo');
+const encrypt_password_service =require("../utilities/password_services").hash_password;
 
 const register_service = async(username, password) => {
     try{
+      const encrypted_password = await encrypt_password_service(password);
        let user_info = await user_model.findOne({
             username: username      
        });
@@ -12,7 +14,7 @@ const register_service = async(username, password) => {
        // user not found therefore creating new one 
        user_info = {
           username: username,
-          password: password
+          password: encrypted_password
        };
       
        user_info = await user_model.create(user_info);
