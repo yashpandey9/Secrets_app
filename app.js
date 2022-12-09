@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const connectionDB = require('./database/connection');
-const routes = require('./router/routes');
+const connectionDB = require('./server/database/connection');
+const routes = require('./server/router/routes');
 
 //connecting MongoDB
 connectionDB();
