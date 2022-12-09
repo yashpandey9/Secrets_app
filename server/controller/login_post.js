@@ -1,7 +1,7 @@
-const register_service = require('../services/register_user');
+const login_service = require('../services/login_user');
 const md5 = require('md5');
 
-const create = async(req, res) => {
+const login = async(req, res) => {
     try{
        const username = req.body.username;
        const password = md5(req.body.password);
@@ -13,17 +13,16 @@ const create = async(req, res) => {
         throw new Error("password missing");
        }
 
-
        else{
          
-         await register_service(username, password);
+         await login_service(username, password);
     
          res.redirect("/secrets");
        }
     }catch(err){
         console.log(err.message);
-        return res.render("register",{error_message:err.message})
+        return res.render("login",{error_message:err.message})
     }
 }
 
-module.exports = create;
+module.exports = login;
